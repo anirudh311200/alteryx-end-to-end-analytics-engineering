@@ -248,7 +248,7 @@ All generated automatically.
 
 ## 🖼️ Full Visuals Gallery
 
-All screenshots (including additional supporting visuals not embedded above) are available in the `visuals/` folder.
+All screenshots (including additional supporting visuals not embedded above) are available in the [`visuals/`](visuals/) folder.
 
 ---
 
