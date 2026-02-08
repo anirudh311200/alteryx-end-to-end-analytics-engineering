@@ -6,6 +6,8 @@ This project demonstrates how raw CSV and Excel files become **trusted analytica
 
 Rather than focusing on dashboards alone, this project emphasizes **workflow engineering, automation, and system design** — showing how complex data pipelines are architected, orchestrated, and operationalized inside Alteryx.
 
+This repository is intentionally structured to showcase not just *what* was built, but *how* and *why* architectural decisions were made across ingestion, transformation, spatial processing, automation, and reporting layers.
+
 ---
 
 ## 🚀 Project Overview
@@ -32,6 +34,8 @@ The system is built around three principles:
 
 This ensures scalability, maintainability, and production reliability.
 
+Additional emphasis is placed on building workflows that can be **extended without redesign**, enabling new data sources, metrics, or outputs to be added with minimal disruption.
+
 ---
 
 ## 🏗️ Architecture Philosophy
@@ -49,6 +53,13 @@ The workflow follows a **container-driven modular architecture**:
 Large Alteryx workflows collapse when everything is chained linearly.  
 Containers create **engineering boundaries** that mirror enterprise design patterns and drastically improve readability, debugging, and extensibility.
 
+This approach also enables:
+
+- Faster troubleshooting  
+- Safer refactoring  
+- Clear ownership of logic  
+- Easier onboarding for new developers  
+
 ---
 
 ## 🔎 Workflow Architecture Overview
@@ -62,6 +73,13 @@ A fully zoomed-out view showing the entire system from ingestion through automat
 
 It establishes scope, complexity, and architectural intent before diving into details.
 
+At a glance, reviewers can see:
+
+- Multiple functional domains  
+- Parallel processing paths  
+- Dedicated reporting pipelines  
+- Macro and app integration  
+
 ---
 
 ### 🧱 Workflow with Containers Labeled
@@ -72,6 +90,8 @@ Medium-zoom view where container titles are readable and functional domains are 
 **Design Decision**
 
 Containers enforce separation of concerns, allowing each section to be reasoned about independently while still participating in a single orchestrated pipeline.
+
+This mirrors how production analytics platforms are structured into layers rather than monolithic scripts.
 
 ---
 
@@ -91,6 +111,14 @@ Multiple CSV and Excel sources including transactions, customers, products, revi
 **Design Decision**
 
 Schema is controlled immediately at ingestion so downstream logic never compensates for dirty or ambiguous field types.
+
+Additional considerations:
+
+- Column renaming is standardized early  
+- Data types are enforced consistently  
+- Invalid records can be isolated before propagation  
+
+This ensures downstream transformations operate on predictable structures.
 
 ---
 
@@ -114,6 +142,13 @@ Standardizes raw transactions and integrates relational attributes.
 
 Join Multiple is used to centralize relational enrichment, preventing deeply nested join chains and improving maintainability.
 
+Transformations here focus on:
+
+- Standardizing keys  
+- Creating derived measures  
+- Normalizing text fields  
+- Aligning schemas across sources  
+
 ---
 
 ## 🔧 Advanced Transaction Transformations
@@ -134,6 +169,8 @@ Creates analytical features and derived measures.
 
 Separating base preparation from advanced transformations allows the same clean dataset to support multiple downstream use cases.
 
+This layer produces analytics-ready tables optimized for reporting, macros, and apps.
+
 ---
 
 ## 🗺️ Spatial Analytics & Trade Area Modeling
@@ -153,6 +190,8 @@ Separating base preparation from advanced transformations allows the same clean 
 
 Spatial logic is isolated so geospatial objects never contaminate transactional pipelines, enabling independent tuning and reuse.
 
+This layer transforms location data into **decision-ready geographic intelligence**.
+
 ---
 
 ## ♻️ Reusable Engineering Components
@@ -166,6 +205,8 @@ Encapsulates repeated join and cleansing logic.
 
 One macro replaces an entire container’s worth of logic, guaranteeing consistency and simplifying maintenance.
 
+Macros ensure business rules are defined once and reused everywhere.
+
 ---
 
 ### Batch Macro – Aggregation Engine
@@ -176,6 +217,8 @@ Parameter-driven aggregation framework.
 **Design Decision**
 
 Batch macros eliminate duplicated summarize logic and enable scalable metric generation.
+
+This allows new metrics to be created by configuration rather than rewiring workflows.
 
 ---
 
@@ -190,6 +233,8 @@ Generates a Tableau `.hyper` extract.
 
 Allows business users to generate extracts without modifying the workflow while protecting core logic.
 
+This separates consumption from engineering.
+
 ---
 
 ## 📤 Engineered Dataset Example
@@ -203,6 +248,8 @@ Multi-year Google review files consolidated into a single analytical dataset.
 
 Union-based consolidation supports incremental growth without manual merging.
 
+New yearly files can be added without modifying transformation logic.
+
 ---
 
 ## 🧾 Automated Reporting Outputs
@@ -211,6 +258,8 @@ Union-based consolidation supports incremental growth without manual merging.
 ![Market Analysis Visual Layout Output](visuals/market_analysis_report_visual_layout_output.png)
 
 Chart-driven executive report assembled using Interactive Chart and Visual Layout tools.
+
+Built entirely inside Alteryx to ensure reproducibility.
 
 ---
 
@@ -223,6 +272,8 @@ Spatial map report built using Report Map, Legend Builder, Layout, and Render.
 
 Reports are produced directly inside Alteryx so they always reflect the latest data and logic.
 
+No manual formatting steps are required.
+
 ---
 
 ## 📦 Final Outputs (Downloadable)
@@ -234,6 +285,8 @@ Reports are produced directly inside Alteryx so they always reflect the latest d
 
 All generated automatically.
 
+Each output represents a different consumption mode: spreadsheet, document, PDF, and BI extract.
+
 ---
 
 ## 💾 How to View & Run
@@ -243,6 +296,8 @@ All generated automatically.
 3. Open in Alteryx Designer  
 4. Run workflow  
 5. Review generated outputs  
+
+No external configuration required.
 
 ---
 
@@ -263,4 +318,3 @@ This project demonstrates Alteryx used as a **true analytics engineering platfor
 - Automated reporting  
 
 It reflects how production-grade Alteryx systems are designed inside real organizations.
-
